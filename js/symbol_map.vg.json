@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height": 400,
+  "width": "container",
+  "title": "Number of times an Artist ended the year in the Billboard Top 100 (2006-2021)",
+  "background": "#e4fce8",
+  "params": [
+    { "name": "zoom", "value": 130,
+      "bind": {"input": "range", "min": 0, "max": 1000, "step": 1} },
+    { "name": "horizontal", "value": 25,
+      "bind": {"input": "range", "min": -180, "max": 180, "step": 1} },
+    { "name": "vertical", "value": 175,
+      "bind": {"input": "range", "min": 0, "max": 360, "step": 1} }
+  ],
+  "projection": {"type": "equalEarth", "scale": {"expr": "zoom"}, "center": {"expr": "[horizontal,vertical]"}},
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/lachiep9/Data-Vis-2/main/js/output.json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightgrey","stroke": "white"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/lachiep9/Data-Vis-2/main/data/Billboard%20artists%20by%20country.csv"
+      },
+      "mark": {"type": "circle", "color":"green"},
+      "encoding": {        
+        "tooltip": [
+      {
+        "field": "Country Name", 
+        "type": "nominal", 
+        "title":"Country"
+        },
+      {
+        "field": "Normalised", 
+        "title":"Finishes in top 100 per 10 million people", 
+        "type": "quantitative", 
+        "format": ".2f"
+        }
+    ],
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "size": {
+          "field": "Normalised",
+          "type": "quantitative",
+          "scale": {"domain": [0, 20]},
+          "legend": {
+            "title": "Per 10 Million",
+            "values": [1,10,20,30,40],
+            "offset": 18
+            }
+        }
+      }
+    }
+  ]
+}

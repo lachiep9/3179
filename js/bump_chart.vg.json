@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Billboard End of Year Rankings",
+  "data": {"url": "https://raw.githubusercontent.com/lachiep9/Data-Vis-2/main/data/Billboard%20Rankings.csv"},
+  "background": "#e4fce8",
+  "vconcat": [{
+    "width":  "container",
+    "height":500,
+    "params": [
+    {
+    "name": "Year", 
+    "select": {"type": "interval", "encodings": ["x"]}
+    }],
+    "transform": [
+      {
+      "sort": [{"field": "Ranking", "order": "ascending"}],
+      "window": [{
+        "op": "rank",
+        "as": "rank"
+      }]
+    }],
+    "mark": {"type": "line", "orient": "vertical","point":{"size": 100}, "size": 5},
+    "encoding": {
+      "x": {
+        "field": "Year", 
+        "type": "temporal", 
+        "timeUnit": "year", 
+        "scale": {
+          "domain":{"param": "Yearfilter"}
+          }},
+      "y": {"field": "Ranking", 
+        "type": "quantitative",
+        "axis":{"grid": false}, 
+        "scale": {
+          "domain": [80, 0]
+        }
+      },
+      "color": {
+        "field": "Artist", "type": "nominal",
+        "scale": {
+          "domain": ["Taylor Swift","Chris Brown","Eminem","Maroon 5","Drake"],
+          "range": ["#05c9f5", "#3a5c3d", "#4bc202", "#2c4ef2", "#22f51b"]
+        }
+      },
+      "tooltip":[
+        {"field": "Year", "type": "temporal"},
+        {"field": "Artist"},
+        {"field": "Ranking"},
+        {"field": "Genre"}
+      ]
+    }
+  },
+  {
+    "width": "container",
+    "height": 60,
+    "params": [
+      {
+        "name": "Yearfilter", 
+        "select": {"type": "interval", "encodings": ["x"]}
+      }],
+    "transform": [
+      {
+      "sort": [{"field": "Ranking", "order": "ascending"}],
+      "window": [{
+        "op": "rank",
+        "as": "rank"
+      }]
+    }],
+    "mark": {"type": "line", "orient": "vertical","point":true},
+    "encoding": {
+      "x": {"field": "Year", "type": "temporal", "timeUnit":"year","axis":{"grid": false}},
+      "y": {"field": "Ranking", 
+        "type": "quantitative",
+        "axis":{"grid": false}, 
+        "scale": {
+          "domain": [80, 0]
+        }
+      },
+      "color": {
+        "field": "Artist", "type": "nominal",
+        "scale": {
+          "domain": ["Taylor Swift","Chris Brown","Eminem","Maroon 5","Drake"],
+          "range": []
+        }
+      }
+    }
+  }]
+}

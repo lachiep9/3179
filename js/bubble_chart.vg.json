@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height": 400,
+  "background": "#e4fce8",
+  "width": "container",
+  "data": {"url": "https://raw.githubusercontent.com/lachiep9/Data-Vis-2/main/data/Songs%20Data.csv"},
+  "transform": [{"filter":  "datum['Cleaned genre'] == 'pop' || datum['Cleaned genre'] == 'rock' || datum['Cleaned genre'] == 'hip hop'"}],
+  "encoding": {
+    "x": {"field": "energy", "type": "quantitative", "axis":{"grid": false}},
+    "y": {"field": "popularity", "type": "quantitative", "scale": {"domain": [0,95]},"axis":{"grid": false}}
+  },
+  "layer":[
+    {   
+      "params":[
+        {
+          "name": "Genre",
+          "select": {"type": "point", "fields": ["Cleaned genre"]},
+          "bind": "legend"
+        },
+        {
+          "name": "grid",
+          "select": "interval",
+          "bind": "scales"
+        }
+      ],
+      "transform": [{"filter": {"param": "Genre"}}],
+      "mark": "circle",
+      "encoding": {
+        "color": {
+          "field": "Cleaned genre", 
+          "type": "nominal",
+          "legend": {
+            "title": "Genre",
+            "offset": 18
+          },
+          "scale":{ "domain":["pop","rock","hip hop"], "range":["#5c75ed","#ed3966","#04871a"]}
+          },
+        "size": {
+          "field": "liveness",
+          "type": "quantitative",
+          "scale": {"domain":[0,1]},
+          "bin": true,
+          "title": "Liveness",
+          "legend": {
+            "offset": 18
+            }
+        },
+        "tooltip": [
+          {"field":"artist"},
+          {"field":"song"},
+          {"field":"year"},
+          {"field":"Cleaned genre"},
+          {"field":"popularity"},
+          {"field": "energy", "format": ".3f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": {"param": "Genre"}}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": -60,
+        "dy": -10,
+        "fontSize": 11,
+        "fontStyle": "italic" 
+      },
+      "encoding": {
+        "text": {"field": "song", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['popularity'] >= 86 || datum['popularity'] <= 26",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ]
+}

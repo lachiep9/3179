@@ -1,0 +1,112 @@
+@font-face {
+    font-family: "Spotify";
+    src: url('../fonts/GothamMedium.ttf');
+}
+
+@font-face {
+    font-family: "Spotify-Bold";
+    src: url('../fonts/GothamBold.ttf');
+}
+
+@font-face {
+    font-family: "Spotify-Italic";
+    src: url('../fonts/GothamMediumItalic.ttf');
+}
+
+@font-face {
+    font-family: "Music";
+    src: url('../fonts/LD Music.ttf');
+}
+
+body *{
+    font-family: "Spotify", sans-serif;
+  }
+  
+  h1 {
+    font-weight: 900;
+    font-family:"Music";
+    font-size: 100px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-family:"Music";
+    font-size: 40px;
+  }
+  
+  body {
+    background-color: lightgray;
+  }
+  
+  .page {
+    width: 1000px;
+    background-color: rgb(228, 252, 232);
+    margin: auto;
+    padding: 30px;
+  }
+  
+  .vis-container {
+    width: 100%;
+  }
+
+  .vis-container-bump {
+    width: 78.5%;
+  }
+  
+  .description h2,
+  h1 {
+    margin-top: 0px;
+  }
+  
+  .description-right {
+    padding-left: 20px;
+  }
+  
+  .description-left {
+    padding-right: 20px;
+  }
+  
+  .pure-g {
+    margin-bottom: 40px;
+  }
+  
+  .small-font {
+    font-size: 14px;
+  }
+
+  p {
+    font-family: "Spotify-Bold";
+  }
+
+  p1 {
+    display: block;
+  }
+
+  p2 {
+    display: block;
+    font-family: "Spotify-Italic";
+    color: rgb(100, 100, 100);
+  }
+
+  .pop {
+    color: #5c75ed;
+    font-family: "Spotify-Bold";
+  }
+
+  .rock {
+    color: #ed3966;
+    font-family: "Spotify-Bold";
+  }
+
+  .hip-hop {
+    color: #04871a;
+    font-family: "Spotify-Bold";
+  }
+
+  div {
+    padding-bottom: 20px;
+  }
+
+  .title {
+    font-family: "Spotify-Bold";
+  }
